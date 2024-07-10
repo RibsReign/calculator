@@ -1,7 +1,16 @@
+"use strict";
 let a = 0;
 let b = 0;
 let operator = null;
 
+const screenText = document.querySelector('#screen');
+const buttonListener = document.querySelectorAll('.number, .control');
+buttonListener.forEach(button => {
+    button.addEventListener('click', () => {
+        alert("Button Clicked!");
+        screenText.textContent = '1234';
+    });
+});
 function operate(a, b, operator) {
     if (operator === '+') {
         return add(a, b);
