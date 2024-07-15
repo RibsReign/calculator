@@ -67,7 +67,9 @@ function clearScreen() {
 }
 
 function pushResult() {
-    screenText.textContent = operate(Number(a), Number(b), operator);
+    const result = operate(Number(a), Number(b), operator);
+    screenText.textContent = Math.round(result * 100) / 100;
+
     numberPair.push(a, b);
     //alert(numberPair);
     a = screenText.textContent;
