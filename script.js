@@ -22,13 +22,21 @@ buttonListener.forEach(button => {
                 pushResult();
             }
             //alert('I AM ON ' + numberSwitch + a + ' ' + operator + ' ' + b);
-            operatorClicked = true;
-            if (button.textContent === '=') {
-                //alert(a + ' ' + operator + ' ' + b);
-                pushResult();
-            }
-            else {
+            /*             if (button.textContent === '=') {
+                            //alert(a + ' ' + operator + ' ' + b);
+                            pushResult();
+                        } */
+            if (button.textContent !== '=' || button.textContent !== 'C') {
                 operator = button.textContent;
+            }
+            operatorClicked = true;
+            if (button.textContent == 'C') {
+                clearScreen();
+                a = '';
+                b = '';
+                operatorClicked = false;
+                addUp = false;
+                numberSwitch = 'a';
             }
 
 
@@ -36,6 +44,7 @@ buttonListener.forEach(button => {
         else {
             if (operatorClicked === true) {
                 clearScreen();
+                operatorClicked = false;
             }
             if (initialize === false) {
                 initialize = true;
@@ -55,7 +64,6 @@ buttonListener.forEach(button => {
 });
 function clearScreen() {
     screenText.textContent = '';
-    operatorClicked = false;
 }
 
 function pushResult() {
@@ -68,20 +76,20 @@ function pushResult() {
 }
 
 function operate(a, b, operator) {
-    if (operator === '+') {
-        return add(a, b);
+    switch (operator) {
+        case '+':
+            return add(a, b);
+        case '-':
+            return subtract(a, b);
+        case '*':
+            return multiply(a, b);
+        case '/':
+            return divide(a, b);
+        default:
+            return 0;
     }
-    else if (operator === '-') {
-        return subtract(a, b);
-    }
-    else if (operator === '*') {
-        return multiply(a, b);
-    }
-    else if (operator === '/')
-        return divide(a, b);
-    else
-        return 0;
 }
+
 console.log(operate(10, 2, '+'));
 function add(a, b) {
     return a + b;
@@ -96,5 +104,8 @@ function multiply(a, b) {
 };
 
 function divide(a, b) {
+    if (b === 0) {
+        return "You think you're sooo funny."
+    }
     return a / b;
 };
